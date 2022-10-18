@@ -87,13 +87,14 @@ func addButtonEnable(button *widget.Button) {
 	}
 }
 
-var __version__ = "1.1"
+var __appname__ = "gogoUserInfo"
+var __version__ = "1.1.1"
 var __contentstring__ string = "Username: {username}\r\nHostname: {hostname}\r\nIP: {ip}"
 var __os__ string = runtime.GOOS
 
 func main() {
 	myApp := app.New()
-	myWindow := myApp.NewWindow("UserInfo v." + __version__ + " (running on " + __os__ + ")")
+	myWindow := myApp.NewWindow(__appname__ + " v." + __version__ + " (running on " + __os__ + ")")
 
 	content := widget.NewLabel("")
 
