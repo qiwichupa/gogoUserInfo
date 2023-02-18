@@ -32,8 +32,8 @@ jobs:
 
     - name: Build
       run: |
-        pwd
-        go mod init
+        go mod init github.com/qiwichupa/gogoUserInfo
+        go mod tidy
         go build -ldflags -H=windowsgui -o ${{matrix.SAVE_AS_NAME}} main.go
 
      
