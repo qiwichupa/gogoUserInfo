@@ -32,9 +32,9 @@ jobs:
 
     - name: Build
       run: |
-        go mod init github.com/qiwichupa/gogoUserInfo
+        go mod init mod
         go mod tidy
-        go build -ldflags -H=windowsgui -o ${{matrix.SAVE_AS_NAME}} main.go
+        go build -v -ldflags -H=windowsgui -o ${{matrix.OUT_FILE_NAME}} ./...
 
      
     - name: Upload
