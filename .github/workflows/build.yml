@@ -34,8 +34,7 @@ jobs:
 
     - name: Build
       run: |
-        go mod init
-        go build -ldflags -H=windowsgui ./
+        go build -ldflags -H=windowsgui -o ${{matrix.SAVE_AS_NAME}} ./...
 
      
     - name: Upload
