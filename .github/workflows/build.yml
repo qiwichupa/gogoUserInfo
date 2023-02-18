@@ -7,8 +7,6 @@ on:
   workflow_dispatch:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   build:
@@ -34,7 +32,8 @@ jobs:
 
     - name: Build
       run: |
-        go build -ldflags -H=windowsgui -o ${{matrix.SAVE_AS_NAME}} ./...
+        pwd
+        go build -ldflags -H=windowsgui -o ${{matrix.SAVE_AS_NAME}} main.go
 
      
     - name: Upload
