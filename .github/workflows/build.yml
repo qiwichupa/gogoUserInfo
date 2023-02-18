@@ -1,0 +1,44 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build executables
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: windows-2019
+            OUT_FILE_NAME: gogoUserInfo.exe
+            SAVE_AS_NAME: gogoUserInfo_windows_x64.exe
+          - os: ubuntu-latest
+            OUT_FILE_NAME: gogoUserInfo
+            SAVE_AS_NAME: gogoUserInfo_linux_x64.exe
+    steps:
+    - name: Clone
+      uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.19
+
+    - name: Build
+      run: go build -ldflags -H=windowsgui ./
+
+     
+    - name: Upload
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{matrix.SAVE_AS_NAME}}
+        path: ./${{matrix.OUT_FILE_NAME}}
+        retention-days: 7
